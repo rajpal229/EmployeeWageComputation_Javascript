@@ -71,4 +71,5 @@ class UC2_Full_or_Part_Time
 }
 
 var obj1 = new UC2_Full_or_Part_Time();
+
 obj1.Wage()
