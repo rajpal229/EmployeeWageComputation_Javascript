@@ -6,12 +6,12 @@ class UC1_Attendence
         let empcheck=Math.floor(Math.random() * 10%2);
         if(empcheck == is_absent)
         {
-            console.log("UC1-Employee is absent")
+            console.log("Employee is absent")
             return 0;
         }
         else
         {
-            console.log("UC1-Employee is present")
+            console.log("Employee is present")
             return 1;
         }
     }
@@ -20,19 +20,21 @@ class UC2_Full_or_Part_Time
 {
     Wage()
     {
-        var obj = new UC1_Attendence();
-        var att = obj.attendence();
         const Is_Part_Time=1;
         const Is_Full_Time=2;
         const part_time_hours=4;
         const full_time_hours=8;
         const wage_per_hour=20;
         const DaysInMonths = 20;
+        const MaximumHrs = 100;
         let monthlywage = 0;
         let wage = 0;
-        let emphrs=0;
+        let emphrs = 0;
+        let TotalHrs = 0;
         for (var i = 1; i <=DaysInMonths; i++)
         {
+            var obj = new UC1_Attendence();
+            var att = obj.attendence();
             if(att == 1)
             {
                 let empcheck1=Math.floor(((Math.random() * 10 % 2) + 1));
@@ -49,10 +51,22 @@ class UC2_Full_or_Part_Time
             }
             }
             wage = emphrs * wage_per_hour;
-            console.log("Wage of the day is: " + wage)
-            monthlywage = monthlywage + wage;
+            console.log("Wage of the day" + i + " is: " + wage)
+            TotalHrs = TotalHrs + emphrs;
+            if (TotalHrs <= MaximumHrs)
+            {
+                monthlywage = monthlywage + wage;
+            }
+            else
+            {
+                TotalHrs = TotalHrs - emphrs;
+                break;
+            }
+            console.log("Monthly Wage is: " + monthlywage)
+            console.log("Hours Worked are: " + TotalHrs)
         }
-        console.log("Monthly Wage is: " + monthlywage)
+        console.log("\nMonthly Wage is: " + monthlywage)
+        console.log("Hours Worked are: " + TotalHrs)
     }
 }
 
