@@ -1,3 +1,16 @@
+const Is_Part_Time=1;
+const Is_Full_Time=2;
+const part_time_hours=4;
+const full_time_hours=8;
+const wage_per_hour=20;
+const DaysInMonths = 20;
+const MaximumHrs = 100;
+
+function calcDailyWage(emphrs)
+{
+    return emphrs * wage_per_hour;
+}
+
 class UC1_Attendence
 {
     attendence()
@@ -20,19 +33,14 @@ class UC2_Full_or_Part_Time
 {
     Wage()
     {
-        const Is_Part_Time=1;
-        const Is_Full_Time=2;
-        const part_time_hours=4;
-        const full_time_hours=8;
-        const wage_per_hour=20;
-        const DaysInMonths = 20;
-        const MaximumHrs = 100;
         let monthlywage = 0;
         let wage = 0;
         let emphrs = 0;
         let TotalHrs = 0;
+        let EmpDailyWage = new Array();
         for (var i = 1; i <=DaysInMonths; i++)
         {
+            console.log("\nDay"+i+"-")
             var obj = new UC1_Attendence();
             var att = obj.attendence();
             if(att == 1)
@@ -50,8 +58,13 @@ class UC2_Full_or_Part_Time
                     break;
             }
             }
-            wage = emphrs * wage_per_hour;
+            else
+            {
+                emphrs = 0;
+            }
+            wage = calcDailyWage(emphrs);
             console.log("Wage of the day" + i + " is: " + wage)
+            EmpDailyWage.push(wage)
             TotalHrs = TotalHrs + emphrs;
             if (TotalHrs <= MaximumHrs)
             {
@@ -60,16 +73,16 @@ class UC2_Full_or_Part_Time
             else
             {
                 TotalHrs = TotalHrs - emphrs;
-                break;
+                
             }
-            console.log("Monthly Wage is: " + monthlywage)
-            console.log("Hours Worked are: " + TotalHrs)
+            console.log("Monthly Wage till now is: " + monthlywage)
+            console.log("Hours Worked till now are: " + TotalHrs)
         }
-        console.log("\nMonthly Wage is: " + monthlywage)
-        console.log("Hours Worked are: " + TotalHrs)
+        console.log("\nDaily Wage Array: " + EmpDailyWage)
+        console.log("Monthly Wage is: " + monthlywage)
+        console.log("Total Hours Worked are: " + TotalHrs)
     }
 }
 
 var obj1 = new UC2_Full_or_Part_Time();
-
 obj1.Wage()
