@@ -5,6 +5,8 @@ const full_time_hours=8;
 const wage_per_hour=20;
 const DaysInMonths = 20;
 const MaximumHrs = 100;
+let DayWorked = 0;
+const EmpDailyWage = new Array();
 
 function calcDailyWage(emphrs)
 {
@@ -37,7 +39,6 @@ class UC2_Full_or_Part_Time
         let wage = 0;
         let emphrs = 0;
         let TotalHrs = 0;
-        let EmpDailyWage = new Array();
         for (var i = 1; i <=DaysInMonths; i++)
         {
             console.log("\nDay"+i+"-")
@@ -45,6 +46,7 @@ class UC2_Full_or_Part_Time
             var att = obj.attendence();
             if(att == 1)
             {
+                DayWorked += 1;
                 let empcheck1=Math.floor(((Math.random() * 10 % 2) + 1));
             switch(empcheck1)
             {
@@ -78,6 +80,7 @@ class UC2_Full_or_Part_Time
             console.log("Monthly Wage till now is: " + monthlywage)
             console.log("Hours Worked till now are: " + TotalHrs)
         }
+        
         console.log("\nDaily Wage Array: " + EmpDailyWage)
         console.log("Monthly Wage is: " + monthlywage)
         console.log("Total Hours Worked are: " + TotalHrs)
@@ -86,3 +89,86 @@ class UC2_Full_or_Part_Time
 
 var obj1 = new UC2_Full_or_Part_Time();
 obj1.Wage()
+
+//UC7 a.
+let sumbyreduce = EmpDailyWage.reduce(function (accumulator, curValue) {
+            return accumulator + curValue  
+          }, 0)
+
+let sumbyforeach = 0;
+EmpDailyWage.forEach(element => {
+    sumbyforeach += element;
+});
+console.log("UC7-A")
+console.log("\nSum using reduce: " + sumbyreduce)
+console.log("\nSum using for each: " + sumbyforeach)
+
+//UC7 b.
+let DailyCntr = 0;
+function mapDayWithWage(EmpDailyWage)
+{
+    DailyCntr++;
+    return  "Day " + DailyCntr + " - Wage: " + EmpDailyWage;
+}
+let mapDayWithWageArray = EmpDailyWage.map(mapDayWithWage); 
+console.log("UC7-B")
+console.log(mapDayWithWageArray)
+
+//UC7 c.
+
+function fulltimeWage(EmpDailyWage)
+{
+    return EmpDailyWage.includes("160");
+}
+let fullDayWageArray = mapDayWithWageArray.filter(fulltimeWage)
+console.log("UC7-C")
+console.log(fullDayWageArray)
+
+// let Days160 = 0;
+// function FullWage(wage)
+// {
+//     if (wage == 160)
+//     {
+//         Days160 ++;
+//         return wage;
+//     }
+// }
+// let FullWageArray = EmpDailyWage.filter(FullWage);
+// console.log("Days when Full time wage of 160 were earned are " + Days160)
+
+
+//UC7 d.
+console.log("UC7-D")
+console.log("Used find " + mapDayWithWageArray.find(fulltimeWage))
+console.log("Used Indexof - first occurrence when Full Time Wage was paid is on Day " + (EmpDailyWage.indexOf(160)+1))
+let first160 = EmpDailyWage.findIndex(function FirstFullDay(value)
+{
+    return value > 80;
+});
+console.log("Using findIndex - " + (first160+1));
+
+//UC7 e.
+console.log("UC7-E")
+console.log(fullDayWageArray.every(fulltimeWage))
+
+//UC7 f.
+console.log("UC7-F")
+function parttimeWage(EmpDailyWage)
+{
+    return EmpDailyWage.includes("80");
+}
+console.log(mapDayWithWageArray.some(parttimeWage))
+
+//UC7 g.
+console.log("UC7-G")
+
+function totaldaysworked(numofdays, EmpDailyWage)
+{
+    if (EmpDailyWage > 0)
+    {
+        return numofdays+1;
+    }
+}
+console.log(EmpDailyWage.reduce(totaldaysworked, 0))
+console.log("The number of days the Employee Worked are " + DayWorked)
+
