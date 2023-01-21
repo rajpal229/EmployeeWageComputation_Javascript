@@ -162,13 +162,14 @@ console.log(mapDayWithWageArray.some(parttimeWage))
 //UC7 g.
 console.log("UC7-G")
 
-function totaldaysworked(numofdays, EmpDailyWage)
-{
-    if (EmpDailyWage > 0)
-    {
-        return numofdays+1;
-    }
-}
-console.log(EmpDailyWage.reduce(totaldaysworked, 0))
+// function totaldaysworked(numofdays, EmpDailyWage)
+// {
+//     if (EmpDailyWage > 0)
+//     {
+//         return numofdays+1;
+//     }
+// }
+// console.log(EmpDailyWage.reduce(totaldaysworked, 0))
+
 console.log("The number of days the Employee Worked are " + DayWorked)
 
