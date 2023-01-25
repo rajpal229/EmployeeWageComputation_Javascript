@@ -90,7 +90,7 @@ class UC2_Full_or_Part_Time
 var obj1 = new UC2_Full_or_Part_Time();
 obj1.Wage()
 
-//UC7 a.
+//UC7 a. Use reduce or Foreach to show sum of Daily Wages
 let sumbyreduce = EmpDailyWage.reduce(function (accumulator, curValue) {
             return accumulator + curValue  
           }, 0)
@@ -99,11 +99,11 @@ let sumbyforeach = 0;
 EmpDailyWage.forEach(element => {
     sumbyforeach += element;
 });
-console.log("UC7-A")
+console.log("\nUC7-A")
 console.log("\nSum using reduce: " + sumbyreduce)
 console.log("\nSum using for each: " + sumbyforeach)
 
-//UC7 b.
+//UC7 b. Use map to show Day with Wage
 let DailyCntr = 0;
 function mapDayWithWage(EmpDailyWage)
 {
@@ -111,65 +111,66 @@ function mapDayWithWage(EmpDailyWage)
     return  "Day " + DailyCntr + " - Wage: " + EmpDailyWage;
 }
 let mapDayWithWageArray = EmpDailyWage.map(mapDayWithWage); 
-console.log("UC7-B")
+console.log("\nUC7-B")
 console.log(mapDayWithWageArray)
 
-//UC7 c.
+//UC7 c. Use filter to show Days with Full time wages
 
 function fulltimeWage(EmpDailyWage)
 {
     return EmpDailyWage.includes("160");
 }
 let fullDayWageArray = mapDayWithWageArray.filter(fulltimeWage)
-console.log("UC7-C")
+console.log("\nUC7-C")
 console.log(fullDayWageArray)
 
-// let Days160 = 0;
-// function FullWage(wage)
-// {
-//     if (wage == 160)
-//     {
-//         Days160 ++;
-//         return wage;
-//     }
-// }
-// let FullWageArray = EmpDailyWage.filter(FullWage);
-// console.log("Days when Full time wage of 160 were earned are " + Days160)
+let Days160 = 0;
+function FullWage(wage)
+{
+    if (wage == 160)
+    {
+        Days160 ++;
+        return wage;
+    }
+}
+let FullWageArray = EmpDailyWage.filter(FullWage);
+console.log("Days when Full time wage of 160 were earned are " + Days160)
 
 
-//UC7 d.
-console.log("UC7-D")
-console.log("Used find " + mapDayWithWageArray.find(fulltimeWage))
+//UC7 d. Use find function to show first day when full time wage is paid
+console.log("\nUC7-D")
+console.log("Used find: " + mapDayWithWageArray.find(fulltimeWage))
 console.log("Used Indexof - first occurrence when Full Time Wage was paid is on Day " + (EmpDailyWage.indexOf(160)+1))
 let first160 = EmpDailyWage.findIndex(function FirstFullDay(value)
 {
     return value > 80;
 });
-console.log("Using findIndex - " + (first160+1));
+console.log("Using findIndex - Day " + (first160+1));
 
-//UC7 e.
-console.log("UC7-E")
+//UC7 e. Every Element of Full Time Wage is truly holding Full time wage
+console.log("\nUC7-E")
 console.log(fullDayWageArray.every(fulltimeWage))
 
-//UC7 f.
-console.log("UC7-F")
+//UC7 f. Check if there is any Part Time Wage
+console.log("\nUC7-F")
 function parttimeWage(EmpDailyWage)
 {
     return EmpDailyWage.includes("80");
 }
 console.log(mapDayWithWageArray.some(parttimeWage))
 
-//UC7 g.
-console.log("UC7-G")
+//UC7 g. Find the number of days the Employee Worked
+console.log("\nUC7-G")
 
-// function totaldaysworked(numofdays, EmpDailyWage)
-// {
-//     if (EmpDailyWage > 0)
-//     {
-//         return numofdays+1;
-//     }
-// }
-// console.log(EmpDailyWage.reduce(totaldaysworked, 0))
+function totaldaysworked(numofdays, EmpDailyWage)
+{
+    if (EmpDailyWage > 0)
+    {
+        return numofdays+1;
+    }
+    return numofdays;
+}
+console.log("Using Reduce: " + EmpDailyWage.reduce(totaldaysworked, 0))
 
 console.log("The number of days the Employee Worked are " + DayWorked)
 
