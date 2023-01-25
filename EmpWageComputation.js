@@ -7,6 +7,7 @@ const DaysInMonths = 20;
 const MaximumHrs = 100;
 let DayWorked = 0;
 const EmpDailyWage = new Array();
+let EmpDailyWageMap =new Map();
 
 function calcDailyWage(emphrs)
 {
@@ -67,6 +68,7 @@ class UC2_Full_or_Part_Time
             wage = calcDailyWage(emphrs);
             console.log("Wage of the day" + i + " is: " + wage)
             EmpDailyWage.push(wage)
+            EmpDailyWageMap.set(i, calcDailyWage(emphrs))
             TotalHrs = TotalHrs + emphrs;
             if (TotalHrs <= MaximumHrs)
             {
@@ -84,6 +86,15 @@ class UC2_Full_or_Part_Time
         console.log("\nDaily Wage Array: " + EmpDailyWage)
         console.log("Monthly Wage is: " + monthlywage)
         console.log("Total Hours Worked are: " + TotalHrs)
+        
+        //UC-8 Store the Day and the Daily Wage
+        console.log("\nUC8 --Daily Wage Map: ")
+        console.log(EmpDailyWageMap)
+
+        function totalwages(monthlywage, EmpDailyWage){
+            return monthlywage + EmpDailyWage;
+        }
+        console.log("UC8 -- Emp Wage Mpap Total Wages: " + Array.from(EmpDailyWageMap.values()).reduce(totalwages, 0))
     }
 }
 
